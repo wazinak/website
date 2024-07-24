@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Новости{% endblock %}
+{% block content %}
+    <h1>Новости</h1>
+    {% for new in news %}
+        <h2>
+            <a href="{% url 'news_detail' news.id %}"> {{ new.title }}</a>
+        </h2>
+        <p class="date">
+            Published {{ new.publish }} by {{ new.author }}
+        </p>
+        {{ new.body|truncatewords:30|linebreaks }}
+    {% endfor %}
+{% endblock %}
