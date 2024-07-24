@@ -1,18 +1,30 @@
-from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from .models import News
 
 
-def index(request):
-    return render(request, 'index.html')
+# def index(request):
+#     return render(request, 'index.html')
 
 
-def news_list(request):
-    news = News.published.all()
-    return render(request, 'news_list.html', {'news': news})
+def new_list(request):
+    new_list = News.published.all()
+    paginator = Paginator(new_list, 3)
+    page_number = request.GET.get('page', 1)
+    try:
+        news = paginator.page(page_number)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+    return render(request, 'list.html', {'news': news})
 
 
-def news_detail(request, id):
-    news = get_object_or_404(News, pk=id, status=News.Status.PUBLISHED)
-    return render(request, 'news_detail.html', {'news': news})
+def new_detail(request, year, month, day, new):
+    new = get_object_or_404(News, status=News.Status.PUBLISHED,
+                            slug=new,
+                            publish__year=year,
+                            publish__month=month,
+                            publish__day=day)
+    return render(request, 'detail.html', {'new': new})
 

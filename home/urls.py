@@ -4,7 +4,7 @@ from home import views
 app_name = 'home'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<int:id>/', views.news_detail, name='news_ detail'),
+    path('', views.new_list, name='new_list'),
+    path('<int:year>/<int:month>/<int:day>/<slug:new>/', views.new_detail, name='new_detail'),
 
 ]
