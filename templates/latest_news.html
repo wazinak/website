@@ -1,0 +1,7 @@
+<ul>
+    {% for new in latest_news %}
+        <li>
+            <a href="{{ new.get_absolute_url }}">{{ new.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
