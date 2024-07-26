@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'home',
+    # my apps here
+    'home.apps.HomeConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/home'
+LOGOUT_REDIRECT_URL = "/"

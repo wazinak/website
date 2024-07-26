@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import News
 
 
-# def index(request):
-#     return render(request, 'index.html')
+def index(request):
+    return render(request, 'index.html')
 
 
 def new_list(request):
